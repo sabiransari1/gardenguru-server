@@ -1,1 +1,1 @@
-# gardenguru-server
+# server
