@@ -76,6 +76,7 @@ userRoutes.post("/login", async (req, res) => {
         msg: "Login successfull",
         token,
         username: `${userCheck.firstname} ${userCheck.lastname}`,
+        email: userCheck.email,
       });
     } else {
       return res
