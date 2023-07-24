@@ -22,7 +22,7 @@ cartRoutes.get("/cartproducts", async (req, res) => {
 cartRoutes.post("/addtocart/:cartproductID", async (req, res) => {
   try {
     const existingUserID = req.body.userID;
-
+    const cartproductID = req.params.cartproductID;
     const product = await productModel.findById(cartproductID);
 
     const cartProduct = await cartModel.create({
