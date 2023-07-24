@@ -2,6 +2,7 @@ const express = require("express");
 const cartRoutes = express.Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 const cartModel = require("../models/cartModel");
+const productModel = require("../models/productModel");
 
 // cartRoutes.use(authMiddleware);
 
@@ -18,12 +19,15 @@ cartRoutes.get("/cartproducts", async (req, res) => {
   }
 });
 
-cartRoutes.post("/addtocart", async (req, res) => {
+cartRoutes.post("/addtocart/:cartproductID", async (req, res) => {
   try {
     const existingUserID = req.body.userID;
 
+    const product = await productModel.findById(cartproductID);
+
     const cartProduct = await cartModel.create({
-      ...req.body,
+      // ...req.body,
+      ...product,
       userID: existingUserID,
     });
 
