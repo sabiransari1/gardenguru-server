@@ -166,13 +166,13 @@ _Base URL:_ http://localhost:8080/
 - _Description:_ Get a list of logging user cart products.
 - _Response:_ Array of task objects with properties \_id, primary_image, alternative_image, title, price, description, old_price, category & type.
 
-- _POST:-_ /cart/addtocart
+- _POST:-_ /cart/addtocart/:_id
 
 - _Description:_ Add a new cart product in the logging user cart lists.
 - _Request Body:_ JSON object with properties \_id, primary_image, alternative_image, title, price, description, old_price, category & type.
 - _Response:_ JSON object with the newly created cart product in the logging user cart lists & success message.
 
-- _DELETE:-_ /cart/delete/:cartproductID
+- _DELETE:-_ /cart/delete/:_id
 
 - _Description:_ Delete a cart product in the logging user cart lists by its \_id.
 - _Response:_ Success message.
