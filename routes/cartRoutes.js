@@ -3,7 +3,7 @@ const cartRoutes = express.Router();
 const authMiddleware = require("../middlewares/authMiddleware");
 const cartModel = require("../models/cartModel");
 
-cartRoutes.use(authMiddleware);
+// cartRoutes.use(authMiddleware);
 
 cartRoutes.get("/cartproducts", async (req, res) => {
   try {
