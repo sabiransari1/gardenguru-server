@@ -19,7 +19,6 @@ cartRoutes.get("/cartproducts", async (req, res) => {
   }
 });
 
-// cartRoutes.post("/addtocart/:cartproductID", async (req, res) => {
 cartRoutes.post("/addtocart/:_id", async (req, res) => {
   try {
     const existingUserID = req.body.userID;
@@ -27,8 +26,7 @@ cartRoutes.post("/addtocart/:_id", async (req, res) => {
     const product = await productModel.findById(_id);
 
     const cartProduct = await cartModel.create({
-      // ...req.body,
-      ...product,
+      ...product._doc,
       userID: existingUserID,
     });
 
@@ -41,20 +39,15 @@ cartRoutes.post("/addtocart/:_id", async (req, res) => {
   }
 });
 
-// cartRoutes.delete("/delete/:cartproductID", async (req, res) => {
 cartRoutes.delete("/delete/:_id", async (req, res) => {
   try {
     const existingUserID = req.body.userID;
-    const cartproductID = req.params.cartproductID;
+    const _id = req.params._id;
 
-    const product = await cartModel.findById(cartproductID);
-
-    console.log(product);
+    const product = await cartModel.findById(_id);
 
     if (product.userID.toString() === existingUserID) {
-      const deletedCartProduct = await cartModel.findByIdAndDelete(
-        cartproductID
-      );
+      const deletedCartProduct = await cartModel.findByIdAndDelete(_id);
       return res.status(200).send({
         msg: "Product has been deleted successfully",
         deletedCartProduct,
