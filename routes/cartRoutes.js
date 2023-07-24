@@ -19,11 +19,12 @@ cartRoutes.get("/cartproducts", async (req, res) => {
   }
 });
 
-cartRoutes.post("/addtocart/:cartproductID", async (req, res) => {
+// cartRoutes.post("/addtocart/:cartproductID", async (req, res) => {
+cartRoutes.post("/addtocart/:_id", async (req, res) => {
   try {
     const existingUserID = req.body.userID;
-    const cartproductID = req.params.cartproductID;
-    const product = await productModel.findById(cartproductID);
+    const _id = req.params._id;
+    const product = await productModel.findById(_id);
 
     const cartProduct = await cartModel.create({
       // ...req.body,
@@ -40,12 +41,15 @@ cartRoutes.post("/addtocart/:cartproductID", async (req, res) => {
   }
 });
 
-cartRoutes.delete("/delete/:cartproductID", async (req, res) => {
+// cartRoutes.delete("/delete/:cartproductID", async (req, res) => {
+cartRoutes.delete("/delete/:_id", async (req, res) => {
   try {
     const existingUserID = req.body.userID;
     const cartproductID = req.params.cartproductID;
 
     const product = await cartModel.findById(cartproductID);
+
+    console.log(product);
 
     if (product.userID.toString() === existingUserID) {
       const deletedCartProduct = await cartModel.findByIdAndDelete(
